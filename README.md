@@ -5,4 +5,5 @@
 
 程序基于python3版本
 
-通过教程https://python123.io/python/muxiatong/5dcc332859efdb0fe44dcc5d学习
+通过教程https://python123.io/python/muxiatong/5dcc332859efdb0fe44dcc5d 以及网络资源学习
+
