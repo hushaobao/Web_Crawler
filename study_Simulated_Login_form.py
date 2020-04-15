@@ -13,8 +13,8 @@ headers = {
     'User-agent': UserAgent().random,
 }
 data = {
-    'name': '17854256510',
-    'password': 'hushao960815s'
+    'name': 'zhanghao',
+    'password': 'mima'
 }
 response = requests.post(url, headers=headers, data=data)
 response.encoding = 'utf-8'
