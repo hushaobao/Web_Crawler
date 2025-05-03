@@ -41,7 +41,7 @@ def login_selenium():
         EC.presence_of_element_located((By.CLASS_NAME, "account-form"))
     )
 
-    pwd_login = broswer.find_element(By.XPATH, '//ul[@class="tab-start"]/li[2]').click()
+    _ = broswer.find_element(By.XPATH, '//ul[@class="tab-start"]/li[2]').click()
 
     user = broswer.find_element(By.XPATH, '//input[@id="username"]')
     pwd = broswer.find_element(By.XPATH, '//input[@id="password"]')
@@ -51,7 +51,7 @@ def login_selenium():
     pwd.click()
     pwd.send_keys("你的密码")
 
-    login = broswer.find_element(
+    _ = broswer.find_element(
         By.XPATH, '//a[@class="btn btn-account btn-active"]'
     ).click()
 

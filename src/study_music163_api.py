@@ -87,6 +87,59 @@ def get_comment_music163(music_id, save_dir="data/"):
     f.close()
 
 
+def get_user_info_music163(user_id):
+    """get user info from music163 by userID
+    Args:
+        user_id (int): netease user id
+
+    Returns:
+        Dict: user info
+    """
+
+    user_info_api = "https://music.163.com/api/v1/user/detail/{}"
+    data = get_url(user_info_api.format(user_id))
+    if data is None:
+        return None
+    return json.loads(data)
+
+
+# TODO: opt run time
+def save_music163_user_info(save_dir="data"):
+    time_sleep = 0.02
+    max_user_id = 1000000000
+
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+
+    save_path = os.path.join(save_dir, "music163_user_info.csv")
+    # write to csv
+    f = open(save_path, "w", encoding="utf-8-sig", newline="")
+    writer_ = csv.writer(f)
+    writer_.writerow(
+        [
+            "userId",
+            "avatarUrl",
+            "backgroundUrl",
+        ]
+    )
+
+    for i in tqdm(range(max_user_id, 0, -1)):
+        user_info = get_user_info_music163(i)
+        time.sleep(time_sleep)
+        if user_info is None:
+            continue
+        if user_info.get("code", 0) != 200:
+            continue
+
+        profile = user_info.get("profile", {})
+        writer_.writerow(
+            [i, profile.get("avatarUrl", "None"), profile.get("backgroundUrl", "None")]
+        )
+
+    f.close()
+
+
 if __name__ == "__main__":
     music_id = "28403111"
     get_comment_music163(music_id)
+    # save_music163_user_info("data/")
